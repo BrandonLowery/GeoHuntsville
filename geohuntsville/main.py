@@ -22,7 +22,7 @@ def static_file(name):
 def query():
     bottle.response.content_type = 'application/json'
     query = bottle.request.query
-    (x1, x2, y1, y2) = [float(query[p]) for p in ['x1', 'y1', 'x2', 'y2']]
+    (x1, y1, x2, y2) = [float(query[p]) for p in ['x1', 'y1', 'x2', 'y2']]
     logger.debug("Query {}, {} {}, {}".format(x1, y1, x2, y2))
     return db.query(x1, y1, x2, y2)
 
