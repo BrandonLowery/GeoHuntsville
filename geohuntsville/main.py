@@ -7,9 +7,16 @@ from geohuntsville.load_test_db import load_test_db
 logger = logging.getLogger(__name__)
 db = load_test_db()
 
+
 @bottle.get('/')
 def index():
     return bottle.static_file('index.html', 'web')
+
+
+@bottle.get('/static/<name>')
+def static_file(name):
+    return bottle.static_file(name, 'web/static')
+
 
 @bottle.get('/api/query')
 def query():
