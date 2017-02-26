@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-PointData = namedtuple('PointData', ['lat', 'lon', 'data'])
+PointData = namedtuple('PointData', ['lon', 'lat', 'data'])
 
 
 def idgen():
@@ -15,22 +15,26 @@ class GeoDb(object):
         self._idgen = idgen()
         self._points = {}  # id -> PointData
 
-    def query(self, lat1, lon1, lat2, lon2):
+    def query(self, lon1, lat1, lon2, lat2):
+        x1 = min(lon1, lon2)
+        x2 = max(lon1, lon2)
+        y1 = min(lat1, lat2)
+        y2 = max(lat1, lat2)
         return self._feature_collection([
             self._feature_point(pid, point)
             for pid, point in self._points.iteritems()
-            if self._point_in(point, lat1, lon1, lat2, lon2)
+            if self._point_in(point, x1, y1, x2, y2)
         ])
 
-    def insert(self, lat, lon, data):
+    def insert(self, lon, lat, data):
         pid = self._idgen.next()
-        self._points[pid] = PointData(lat, lon, data)
+        self._points[pid] = PointData(lon, lat, data)
         return pid
 
     @staticmethod
-    def _point_in(point, lat1, lon1, lat2, lon2):
-        return lat1 <= point.lat < lat2 and\
-               lon1 <= point.lon < lon2
+    def _point_in(point, x1, y1, x2, y2):
+        return x1 <= point.lon < x2 and \
+               y1 <= point.lat < y2
 
     @staticmethod
     def _feature_point(pid, point):
@@ -38,7 +42,7 @@ class GeoDb(object):
             "type": "Feature",
             "geometry": {
                 "type": "Point",
-                "coordinates": [point.lat, point.lon]
+                "coordinates": [point.lon, point.lat]
             },
             "properties": {
                 "id": pid,
