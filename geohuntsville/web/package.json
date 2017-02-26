@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "dependencies": {
     "browserify": "^14.1.0",
+    "http": "0.0.0",
+    "https": "^1.0.0",
     "mapbox": "^1.0.0-beta6",
     "mapbox-gl": "^0.32.1",
     "rest": "^2.0.0"
