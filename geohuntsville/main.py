@@ -5,6 +5,7 @@ import bottle
 
 from geohuntsville.load_test_db import load_test_db
 from geohuntsville.geodb import GeoDb
+from geohuntsville import twitter_streaming
 
 logger = logging.getLogger(__name__)
 db = GeoDb()
@@ -46,4 +47,6 @@ if __name__ == '__main__':
                         format='[%(asctime)s][%(filename)s:%(lineno)s][%(levelname)s] %(message)s')
     load_test_db(db, 'data/historical_tweets.json')
     load_test_db(db, 'data/coordinates.json')
+
+    twitter_streaming.start_daemon(db)
     bottle.run(host='localhost', port=8080)
