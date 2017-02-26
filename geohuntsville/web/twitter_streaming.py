@@ -19,8 +19,6 @@ class CustomStreamListener(tweepy.StreamListener):
     #def __init__(self):
        # pass
     def on_status(self, status):
-        #print status
-       # print "tweet recieved"
         text = str(status)
         self.parse(text)
 
@@ -30,8 +28,6 @@ class CustomStreamListener(tweepy.StreamListener):
         find = "=u"
         find2 = "is_quote_status=True"
         find3= "is_quote_status=False"
-        #first = text.rfind(find) #get begin of tweet element
-        #second = text.rfind(find2, first+1) #get end of tweet element
         first = text.find(find)
         second = text.find(find2)
         third = text.find(find3)
