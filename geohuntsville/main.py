@@ -1,3 +1,4 @@
+import json
 import logging
 
 import bottle
@@ -25,6 +26,17 @@ def query():
     (x1, y1, x2, y2) = [float(query[p]) for p in ['x1', 'y1', 'x2', 'y2']]
     logger.debug("Query {}, {} {}, {}".format(x1, y1, x2, y2))
     return db.query(x1, y1, x2, y2)
+
+
+@bottle.post('/api/waypoint')
+def add_waypoint():
+    waypoint = json.loads(bottle.request.body.read())
+    lon = waypoint['lon']
+    lat = waypoint['lat']
+    data = waypoint['data']
+    logger.debug("Add waypoint at {}, {}: {}".format(lon, lat, data))
+    db.insert(lon, lat, data)
+
 
 if __name__ == '__main__':
     import sys
