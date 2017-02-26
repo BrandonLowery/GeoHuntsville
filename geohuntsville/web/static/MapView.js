@@ -2,18 +2,41 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhlY2t3b2xmIiwiYSI6ImNpemx5MjNvdDAxcG0zM283eGUyaWd1bDkifQ.AtiIZ0g0yx0PmrcWWPsYTg';
 const http = require('http');
 var reply;
-var options = {
-  hostname: 'localhost',
-  port: 8080,
-  path: '/api/query?x1=-2000&y1=-20000&x2=10000&y2=10000',
-  method: 'GET'
-};
 var monument = [-86.601791, 34.738228];
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/outdoors-v9',
     center: monument,
     zoom: 15
+});
+
+map.on('click', function (e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['points'] });
+    var html = (features.length > 0) ?
+        features[0].properties.description :
+        '<form id="waypointEdit" method="dialog">' +
+            '<h3>Add New Intel</h3>' +
+            'Description:<br>' +
+            '<input type="description" name="description"><br>' +
+            'Type:<br>' +
+            '<select name="title">' +
+                '<option>Fire</option>' +
+                '<option>Flooding</option>' +
+                '<option>Injuries</option>' +
+                '</select>' +
+            '</section>' +
+            '<menu>' +
+                '<button onClick="submitWaypoint(' + e.lngLat.lng + ', ' + e.lngLat.lat + ')" type="submit">Save</button>' +
+            '</menu>' +
+        '</form>';
+    var lngLat = (features.length > 0) ? features[0].geometry.coordinates : [e.lngLat.lng, e.lngLat.lat];
+    var popup = new mapboxgl.Popup()
+        .setLngLat(lngLat)
+        .setHTML(html)
+        .addTo(map)
+        .on("close", function(){
+            //refreshWaypoints();
+        });
 });
 
 // create the popup
@@ -24,14 +47,40 @@ var popup = new mapboxgl.Popup({offset: 25})
 var el = document.createElement('div');
 el.id = 'marker';
 
+window.submitWaypoint = function(lng, lat) {
+    var form = new FormData(document.querySelector('#waypointEdit'));
+    var data = {
+      "lon": lng,
+      "lat": lat,
+      "data": {
+        "title": form.get("title"),
+        "description": form.get("description")
+      }
+    }
+    console.log(data);
+    var req = http.request({
+      hostname: 'localhost',
+      port: 8080,
+      path: '/api/waypoint',
+      method: 'POST'
+    });
+    req.write(JSON.stringify(data))
+    req.end();
+}
+
 // create the marker
 
 map.on('load', function () {
+    var options = {
+      hostname: 'localhost',
+      port: 8080,
+      path: '/api/query?x1=-2000&y1=-20000&x2=10000&y2=10000',
+      method: 'GET'
+    };
     var req = http.request(options, function (res) {
         res.on('data', function (d) {
-            reply = JSON.parse(d);
-            console.log('Response ' , reply);
-            map.addLayer({
+            var reply = JSON.parse(d);
+            var geojson = {
                 "id": "points",
                 "type": "symbol",
                 "source": {
@@ -45,25 +94,14 @@ map.on('load', function () {
                     "text-offset": [0, 0.6],
                     "text-anchor": "top"
                 }
-            });
-            map.on('click', function (e) {
-                var features = map.queryRenderedFeatures(e.point, { layers: ['points'] });
-                if (features.length > 0) {
-                    var feature = features[0];
-                    var popup = new mapboxgl.Popup()
-                        .setLngLat(feature.geometry.coordinates)
-                        .setHTML(feature.properties.description)
-                        .addTo(map);
-                }
-            });
+            };
+            map.addLayer(geojson);
         });
     });
     req.on('error', function (e) {
         console.error(e);
     });
     req.end();
-
-
 });
 
 
