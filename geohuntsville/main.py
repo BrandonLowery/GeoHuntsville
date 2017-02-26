@@ -4,9 +4,10 @@ import logging
 import bottle
 
 from geohuntsville.load_test_db import load_test_db
+from geohuntsville.geodb import GeoDb
 
 logger = logging.getLogger(__name__)
-db = load_test_db()
+db = GeoDb()
 
 
 @bottle.get('/')
@@ -43,4 +44,6 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG,
                         stream=sys.stdout,
                         format='[%(asctime)s][%(filename)s:%(lineno)s][%(levelname)s] %(message)s')
+    load_test_db(db, 'data/historical_tweets.json')
+    load_test_db(db, 'data/coordinates.json')
     bottle.run(host='localhost', port=8080)

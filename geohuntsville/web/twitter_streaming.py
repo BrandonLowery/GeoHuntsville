@@ -16,35 +16,27 @@ api = tweepy.API(auth)
 
 
 class CustomStreamListener(tweepy.StreamListener):
-    #def __init__(self):
-       # pass
+    def __init__(self, *args, **kwargs):
+        super(CustomStreamListener, self).__init__(*args, **kwargs)
+        self.tweets = []
+
     def on_status(self, status):
-        text = str(status)
-        self.parse(text)
-
-
-    def parse(self, text):
-
-        find = "=u"
-        find2 = "is_quote_status=True"
-        find3= "is_quote_status=False"
-        first = text.find(find)
-        second = text.find(find2)
-        third = text.find(find3)
-        if second>5: #if-elif block to test for 2  dif ending keyword possibilities
-            end = second
-            text2 = text[first:]  # cut first bit up to tweet off
-            text3 = text2[2:]  # clean beginning a bit
-            text4 = text3[:second]  # cut end off
-
-        elif third>5:
-            end = third
-            text2 = text[first:]  # cut first bit up to tweet off
-            text3 = text2[2:]  # clean beginning a bit
-            text4 = text3[:third]  # cut end off
-
-        print text4
-
+        if status.coordinates is not None:
+            print status
+            try:
+                self.tweets.append({
+                    "data": {
+                        "icon": "",
+                        "title": "tweet",
+                        "description": str(status.text)
+                    },
+                    "coordinate": status.coordinates['coordinates']
+                })
+                import json
+                with open("historical_tweets.json", "w+b") as fp:
+                    json.dump(self.tweets, fp, indent=4)
+            except Exception as e:
+                print e
 
     def on_error(self, status_code):
         print >> sys.stderr, 'Encountered error with status code ', status_code
@@ -56,6 +48,5 @@ class CustomStreamListener(tweepy.StreamListener):
 
 sapi = tweepy.streaming.Stream(auth, CustomStreamListener())
 
-#sapi.filter(locations=[-74.734497, 40.454001,73.317261,41.663423]) #NYC for testing
 sapi.filter(locations=[-86.886063, 34.51561, -86.211777, 34.906205]) #need import from geodb.py huntsville
 

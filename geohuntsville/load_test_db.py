@@ -1,14 +1,14 @@
 import json
 import logging
 
-from geohuntsville.geodb import GeoDb
-
 logger = logging.getLogger(__name__)
 
 
-def load_test_db():
-    db = GeoDb()
-    with open('data/coordinates.json') as fp:
+def load_test_db(db, name):
+    with open(name) as fp:
         for data in json.load(fp):
-            db.insert(data['coordinate'][0], data['coordinate'][1], data['data'])
+            try:
+                db.insert(data['coordinate'][0], data['coordinate'][1], data['data'])
+            except Exception as e:
+                logger.error(e)
     return db

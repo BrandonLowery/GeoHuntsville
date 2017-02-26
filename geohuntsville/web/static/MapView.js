@@ -96,6 +96,22 @@ map.on('load', function () {
                 }
             };
             map.addLayer(geojson);
+
+            reply.features.forEach(function(marker) {
+                if (marker.properties.iconSize && marker.properties.icon) {
+                    // create a DOM element for the marker
+                    var el = document.createElement('div');
+                    el.className = 'marker';
+                    var url = 'url(' + marker.properties.icon + ')';
+                    el.style.backgroundImage = url;
+                    el.style.width = marker.properties.iconSize[0] + 'px';
+                    el.style.height = marker.properties.iconSize[1] + 'px';
+
+                    new mapboxgl.Marker(el, {offset: [-marker.properties.iconSize[0] / 2, -marker.properties.iconSize[1] / 2]})
+                                .setLngLat(marker.geometry.coordinates)
+                                .addTo(map);
+                }
+            });
         });
     });
     req.on('error', function (e) {

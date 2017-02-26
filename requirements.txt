@@ -1,5 +1,5 @@
 bottle==0.12.13
-tweepy 3.2
+tweepy==3.2
 
 
 

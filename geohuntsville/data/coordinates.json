@@ -81,7 +81,9 @@
    {
   "data":{
     "title":"Fire 6",
-    "description": "Fire reported"
+    "description": "Fire reported",
+    "icon": "static/foo.png",
+    "iconSize": [20, 20]
   },
   "coordinate": [ -86.57925, 34.737874 ]
 },
