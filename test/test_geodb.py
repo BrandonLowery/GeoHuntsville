@@ -13,9 +13,9 @@ class TestGeoDb(unittest.TestCase):
 
     def test_query_filters_points(self):
         db = GeoDb()
-        db.insert(0, 0, "0,0")
-        db.insert(5, 0, "5,0")
-        db.insert(0, 5, "0,5")
+        db.insert(0, 0, {"c": "0,0"})
+        db.insert(5, 0, {"c": "5,0"})
+        db.insert(0, 5, {"c": "0,5"})
         self.assertEqual(db.query(4, 0, 6, 1), {
             "type": "FeatureCollection",
             "features": [
@@ -27,7 +27,7 @@ class TestGeoDb(unittest.TestCase):
                     },
                     "properties": {
                         "id": 1001,
-                        "data": "5,0"
+                        "c": "5,0"
                     }
                 }
             ]

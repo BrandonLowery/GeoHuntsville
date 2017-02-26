@@ -2,134 +2,134 @@
 
 {
   "data":{
-    "name":"Von Braun Center"
+    "title":"Von Braun Center"
   },
   "coordinate": [-86.59044, 34.726571]
 },
 
 {
   "data":{
-    "name":"Madison County Courthouse"
+    "title":"Madison County Courthouse"
   },
   "coordinate": [-86.585076, 34.730274]
 },
   {
   "data":{
-    "name":"Huntsville Utilities"
+    "title":"Huntsville Utilities"
   },
   "coordinate": [-86.587243, 34.729727]
 },
   {
   "data":{
-    "name":"Huntsville Museam of Arm"
+    "title":"Huntsville Museam of Arm"
   },
   "coordinate": [-86.586986, 34.727347]
 },
    {
   "data":{
-    "name":"Huntsville-Madison County Library"
+    "title":"Huntsville-Madison County Library"
   },
   "coordinate": [-86.589603, 34.722726]
 },
    {
   "data":{
-    "name":"Huntsville Hospitol"
+    "title":"Huntsville Hospitol"
   },
   "coordinate": [-86.580677, 34.721121]
 },
      {
   "data":{
-    "name":"Fire 1"
+    "title":"Fire 1"
   },
   "coordinate": [-86.580108, 34.738544]
 },
   {
   "data":{
-    "name":"Fire 2"
+    "title":"Fire 2"
   },
   "coordinate": [ -86.579872, 34.738527 ]
 },
   {
   "data":{
-    "name":"Fire 3"
+    "title":"Fire 3"
   },
   "coordinate": [ -86.579744, 34.738174]
 },
   {
   "data":{
-    "name":"Fire 4"
+    "title":"Fire 4"
   },
   "coordinate": [ -86.579486, 34.738015]
 },
   {
   "data":{
-    "name":"Fire 5"
+    "title":"Fire 5"
   },
   "coordinate": [ -86.579057, 34.738456 ]
 },
    {
   "data":{
-    "name":"Fire 6"
+    "title":"Fire 6"
   },
   "coordinate": [ -86.57925, 34.737874 ]
 },
   {
   "data":{
-    "name":"Fire 7"
+    "title":"Fire 7"
   },
   "coordinate": [ -86.578864, 34.738068  ]
 },
    {
   "data":{
-    "name":"Fire 8"
+    "title":"Fire 8"
   },
   "coordinate": [ -86.578435, 34.73835]
 },
   {
   "data":{
-    "name":"Fire 9"
+    "title":"Fire 9"
   },
   "coordinate": [ -86.579164, 34.73828 ]
 },
   {
   "data":{
-    "name":"Fire 10"
+    "title":"Fire 10"
   },
   "coordinate": [ -86.579062, 34.738721 ]
 },
   {
   "data":{
-    "name":"Fire 11"
+    "title":"Fire 11"
   },
   "coordinate": [ -86.57976, 34.738694 ]
 },
   {
   "data":{
-    "name":"Flood 1"
+    "title":"Flood 1"
   },
   "coordinate": [ -86.581844, 34.723916 ]
 },
   {
   "data":{
-    "name":"Flood 2"
+    "title":"Flood 2"
   },
   "coordinate": [  -86.581554, 34.72404 ]
 },
    {
   "data":{
-    "name":"Flood 3"
+    "title":"Flood 3"
   },
   "coordinate": [ -86.580889, 34.724238 ]
 },
   {
   "data":{
-    "name":"Flood 4"
+    "title":"Flood 4"
   },
   "coordinate": [  -86.581822, 34.724247  ]
 },
   {
   "data":{
-    "name":"Flood 5"
+    "title":"Flood 5"
   },
   "coordinate": [  -86.582493,  34.724053 ]
 }

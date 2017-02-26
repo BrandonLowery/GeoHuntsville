@@ -44,10 +44,7 @@ class GeoDb(object):
                 "type": "Point",
                 "coordinates": [point.lon, point.lat]
             },
-            "properties": {
-                "id": pid,
-                "data": point.data
-            }
+            "properties": dict([("id", pid)] + point.data.items())
         }
 
     @staticmethod

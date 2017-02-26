@@ -31,6 +31,21 @@ map.on('load', function () {
         res.on('data', function (d) {
             reply = JSON.parse(d);
             console.log('Response ' , reply);
+            map.addLayer({
+                "id": "points",
+                "type": "symbol",
+                "source": {
+                    "type": "geojson",
+                    "data": reply
+                },
+                "layout": {
+                    "icon-image": "{icon}-15",
+                    "text-field": "{title}",
+                    "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                    "text-offset": [0, 0.6],
+                    "text-anchor": "top"
+                }
+            });
         });
     });
     req.on('error', function (e) {
