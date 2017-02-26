@@ -46,6 +46,16 @@ map.on('load', function () {
                     "text-anchor": "top"
                 }
             });
+            map.on('click', function (e) {
+                var features = map.queryRenderedFeatures(e.point, { layers: ['points'] });
+                if (features.length > 0) {
+                    var feature = features[0];
+                    var popup = new mapboxgl.Popup()
+                        .setLngLat(feature.geometry.coordinates)
+                        .setHTML(feature.properties.description)
+                        .addTo(map);
+                }
+            });
         });
     });
     req.on('error', function (e) {

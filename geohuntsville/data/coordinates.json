@@ -2,134 +2,156 @@
 
 {
   "data":{
-    "title":"Von Braun Center"
+    "title":"Von Braun Center",
+    "description": "Emergency shelter location"
   },
   "coordinate": [-86.59044, 34.726571]
 },
 
 {
   "data":{
-    "title":"Madison County Courthouse"
+    "title":"Madison County Courthouse",
+    "description": "Emergency shelter location"
   },
   "coordinate": [-86.585076, 34.730274]
 },
   {
   "data":{
-    "title":"Huntsville Utilities"
+    "title":"Huntsville Utilities",
+    "description": "Emergency shelter location"
   },
   "coordinate": [-86.587243, 34.729727]
 },
   {
   "data":{
-    "title":"Huntsville Museam of Arm"
+    "title":"Huntsville Museum of Arm",
+    "description": "Emergency shelter location"
   },
   "coordinate": [-86.586986, 34.727347]
 },
    {
   "data":{
-    "title":"Huntsville-Madison County Library"
+    "title":"Huntsville-Madison County Library",
+    "description": "Emergency shelter location"
   },
   "coordinate": [-86.589603, 34.722726]
 },
    {
   "data":{
-    "title":"Huntsville Hospitol"
+    "title":"Huntsville Hospital",
+    "description": "Emergency shelter location"
   },
   "coordinate": [-86.580677, 34.721121]
 },
      {
   "data":{
-    "title":"Fire 1"
+    "title":"Fire 1",
+    "description": "Fire reported"
   },
   "coordinate": [-86.580108, 34.738544]
 },
   {
   "data":{
-    "title":"Fire 2"
+    "title":"Fire 2",
+    "description": "Fire reported"
   },
   "coordinate": [ -86.579872, 34.738527 ]
 },
   {
   "data":{
-    "title":"Fire 3"
+    "title":"Fire 3",
+    "description": "Fire reported"
   },
   "coordinate": [ -86.579744, 34.738174]
 },
   {
   "data":{
-    "title":"Fire 4"
+    "title":"Fire 4",
+    "description": "Fire reported"
   },
   "coordinate": [ -86.579486, 34.738015]
 },
   {
   "data":{
-    "title":"Fire 5"
+    "title":"Fire 5",
+    "description": "Fire reported"
   },
   "coordinate": [ -86.579057, 34.738456 ]
 },
    {
   "data":{
-    "title":"Fire 6"
+    "title":"Fire 6",
+    "description": "Fire reported"
   },
   "coordinate": [ -86.57925, 34.737874 ]
 },
   {
   "data":{
-    "title":"Fire 7"
+    "title":"Fire 7",
+    "description": "Fire reported"
   },
   "coordinate": [ -86.578864, 34.738068  ]
 },
    {
   "data":{
-    "title":"Fire 8"
+    "title":"Fire 8",
+    "description": "Fire reported"
   },
   "coordinate": [ -86.578435, 34.73835]
 },
   {
   "data":{
-    "title":"Fire 9"
+    "title":"Fire 9",
+    "description": "Fire reported"
   },
   "coordinate": [ -86.579164, 34.73828 ]
 },
   {
   "data":{
-    "title":"Fire 10"
+    "title":"Fire 10",
+    "description": "Fire reported"
   },
   "coordinate": [ -86.579062, 34.738721 ]
 },
   {
   "data":{
-    "title":"Fire 11"
+    "title":"Fire 11",
+    "description": "Fire reported"
   },
   "coordinate": [ -86.57976, 34.738694 ]
 },
   {
   "data":{
-    "title":"Flood 1"
+    "title":"Flood 1",
+    "description": "Flooding reported"
   },
   "coordinate": [ -86.581844, 34.723916 ]
 },
   {
   "data":{
-    "title":"Flood 2"
+    "title":"Flood 2",
+    "description": "Flooding reported"
   },
   "coordinate": [  -86.581554, 34.72404 ]
 },
    {
   "data":{
-    "title":"Flood 3"
+    "title":"Flood 3",
+    "description": "Flooding reported"
   },
   "coordinate": [ -86.580889, 34.724238 ]
 },
   {
   "data":{
-    "title":"Flood 4"
+    "title":"Flood 4",
+    "description": "Flooding reported"
   },
   "coordinate": [  -86.581822, 34.724247  ]
 },
   {
   "data":{
-    "title":"Flood 5"
+    "title":"Flood 5",
+    "description": "Flooding reported"
   },
   "coordinate": [  -86.582493,  34.724053 ]
 }
