@@ -1,0 +1,8 @@
+{
+  "name": "geohuntsville",
+  "version": "0.0.1",
+  "dependencies": {
+    "mapbox": "^1.0.0-beta6",
+    "mapbox-gl": "^0.32.1"
+  }
+}
