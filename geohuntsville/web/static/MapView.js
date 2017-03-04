@@ -56,17 +56,16 @@ window.submitWaypoint = function(lng, lat) {
         "title": form.get("title"),
         "description": form.get("description")
       }
-    }
-    console.log(data);
+    };
     var req = http.request({
       hostname: 'localhost',
       port: 8080,
       path: '/api/waypoint',
       method: 'POST'
     });
-    req.write(JSON.stringify(data))
+    req.write(JSON.stringify(data));
     req.end();
-}
+};
 
 // create the marker
 
@@ -78,43 +77,45 @@ map.on('load', function () {
       method: 'GET'
     };
     var req = http.request(options, function (res) {
+        var chunks = [];
         res.on('data', function (d) {
-            try {
-                var reply = JSON.parse(d);
-                var geojson = {
-                    "id": "points",
-                    "type": "symbol",
-                    "source": {
-                        "type": "geojson",
-                        "data": reply
-                    },
-                    "layout": {
-                        "icon-image": "{icon}-15",
-                        "text-field": "{title}",
-                        "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-                        "text-offset": [0, 0.6],
-                        "text-anchor": "top"
-                    }
-                };
-                map.addLayer(geojson);
+            chunks.push(d);
+        });
 
-                reply.features.forEach(function(marker) {
-                    if (marker.properties.iconSize && marker.properties.icon) {
-                        // create a DOM element for the marker
-                        var el = document.createElement('div');
-                        el.className = 'marker';
-                        var url = 'url(' + marker.properties.icon + ')';
-                        el.style.backgroundImage = url;
-                        el.style.width = marker.properties.iconSize[0] + 'px';
-                        el.style.height = marker.properties.iconSize[1] + 'px';
+        res.on('end', function () {
+            var reply = JSON.parse(chunks.join(""));
+            var geojson = {
+                "id": "points",
+                "type": "symbol",
+                "source": {
+                    "type": "geojson",
+                    "data": reply
+                },
+                "layout": {
+                    "icon-image": "{icon}-15",
+                    "text-field": "{title}",
+                    "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                    "text-offset": [0, 0.6],
+                    "text-anchor": "top"
+                }
+            };
+            map.addLayer(geojson);
 
-                        new mapboxgl.Marker(el, {offset: [-marker.properties.iconSize[0] / 2, -marker.properties.iconSize[1] / 2]})
-                                    .setLngLat(marker.geometry.coordinates)
-                                    .addTo(map);
-                    }
-                });
-            } finally {
-            }
+            reply.features.forEach(function(marker) {
+                if (marker.properties.iconSize && marker.properties.icon) {
+                    // create a DOM element for the marker
+                    var el = document.createElement('div');
+                    el.className = 'marker';
+                    var url = 'url(' + marker.properties.icon + ')';
+                    el.style.backgroundImage = url;
+                    el.style.width = marker.properties.iconSize[0] + 'px';
+                    el.style.height = marker.properties.iconSize[1] + 'px';
+
+                    new mapboxgl.Marker(el, {offset: [-marker.properties.iconSize[0] / 2, -marker.properties.iconSize[1] / 2]})
+                                .setLngLat(marker.geometry.coordinates)
+                                .addTo(map);
+                }
+            });
         });
     });
     req.on('error', function (e) {

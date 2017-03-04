@@ -15,32 +15,22 @@ api = tweepy.API(auth)
 
 
 class CustomStreamListener(tweepy.StreamListener):
-    def __init__(self, **kwargs):
+    def __init__(self, db):
         super(CustomStreamListener, self).__init__()
-        self.db = kwargs.get('db')
-        self.tweets = []
+        self.db = db
 
     def on_status(self, status):
         if status.coordinates is not None:
-            try:
-                data = self.format_tweet(status)
-                self.tweets.append(data)
-                if self.db is not None:
-                    self.db.insert(data['coordinate'][0], data['coordinate'][1], data['data'])
-            except Exception as e:
-                print e
-
-    def dump_history(self):
-        import json
-        with open("../data/historical_tweets.json", "w+b") as fp:
-            json.dump(self.tweets, fp, indent=4)
+            logger.debug(status)
+            data = self.format_tweet(status)
+            self.db.insert(data['coordinate'][0], data['coordinate'][1], data['data'])
 
     def on_error(self, status_code):
-        print >> sys.stderr, 'Encountered error with status code ', status_code
+        logger.error('Encountered error with status code {}'.format(status_code))
         return True
 
     def on_timeout(self):
-        print >> sys.stderr, 'Timeout'
+        logger.error('Timeout')
         return True
 
     @staticmethod
@@ -49,7 +39,7 @@ class CustomStreamListener(tweepy.StreamListener):
             "data": {
                 "icon": "",
                 "title": "tweet",
-                "description": str(tweet.text)
+                "description": tweet.text
             },
             "coordinate": tweet.coordinates['coordinates'] if tweet.coordinates is not None else [0, 0]
         }
@@ -60,17 +50,9 @@ def start_daemon(db):
 
     def collector():
         logger.debug('Starting tweet collector')
-        sapi = tweepy.streaming.Stream(auth, CustomStreamListener(db=db))
+        sapi = tweepy.streaming.Stream(auth, CustomStreamListener(db))
         sapi.filter(locations=[-86.886063, 34.51561, -86.211777, 34.906205]) #need import from geodb.py huntsville
 
     t = threading.Thread(target=collector)
     t.daemon = True
     t.start()
-
-if __name__ == '__main__':
-    from time import sleep
-    start_daemon(None)
-    while True:
-        sleep(1)
-
-
